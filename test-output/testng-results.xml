@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-03-29T13:16:52 IST" name="Default suite" finished-at="2022-03-29T13:17:11 IST" duration-ms="18953">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.RunnerIO@3ee37e5a]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2022-03-29T13:16:52 IST" name="Default test" finished-at="2022-03-29T13:17:11 IST" duration-ms="18953">
+      <class name="runner.RunnerIO">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:runner.RunnerIO@3ee37e5a]" started-at="2022-03-29T13:16:52 IST" name="setUpClass" finished-at="2022-03-29T13:16:52 IST" duration-ms="289" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.RunnerIO@3ee37e5a]" started-at="2022-03-29T13:16:52 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-03-29T13:17:11 IST" duration-ms="18596" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["As a user I want to Create new Organization with mandatory fields"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Data Driven Testing]"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:runner.RunnerIO@3ee37e5a]" started-at="2022-03-29T13:17:11 IST" name="tearDownClass" finished-at="2022-03-29T13:17:11 IST" duration-ms="37" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- runner.RunnerIO -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

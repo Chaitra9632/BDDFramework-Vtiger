@@ -9,7 +9,7 @@ import io.cucumber.testng.CucumberOptions;
 		                           // or the Hook class can be maintained in stepDefinitions package only
 		dryRun = false,//if true - doesn't execute in the browser
 		               // if false execute in the browser
-		plugin = {"pretty","html:cucumber.html"},// print the log status/scenario steps in console helpful in debugging
+		plugin = {"pretty","html:Report.html"},// print the log status/scenario steps in console helpful in debugging
 		                                         // Used in report generation
 		monochrome = true //print log in readable format by eliminating special characters
 		)

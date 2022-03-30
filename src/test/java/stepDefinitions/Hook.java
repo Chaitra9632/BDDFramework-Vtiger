@@ -64,15 +64,16 @@ public class Hook extends WebDriverUtility{
 		{
 			/*To attach screenshot to report we have to capture it in byte format only refer below code for that*/
 			
-//			//take screenshot
-//		    TakesScreenshot ts =(TakesScreenshot) base.driver;
-//		    //handle in byte format
-//		    byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
-//		    //attach the screenshot to cucumber report
-//		    scenario.attach(screenshot, "image/png", scenario.getName()); 
+			//take screenshot
+		    TakesScreenshot ts =(TakesScreenshot) base.driver;
+		    //handle in byte format
+		    byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
+		    //attach the screenshot to cucumber report
+		    scenario.attach(screenshot, "image/png", scenario.getName()); 
 		
 			/*This will store the screenshot in folder called from Webdriver utility but in file format we cannot attach it to report*/
 			getScreenShot(base.driver, scenario.getName());
+			
 			
 		}
 		base.driver.close();

@@ -326,6 +326,20 @@ public class WebDriverUtility {
 		//js.executeScript("argument[0].scrollIntoView()",element);
 	}
 	
+	/**
+	 * can be used for drag and drop also for slide bar
+	 * @param driver
+	 * @param src
+	 * @param dst
+	 */
+	public void dragAndDropUsingAction(WebDriver driver, WebElement src, WebElement target)
+	{
+		Actions act = new Actions(driver);
+		act.clickAndHold(src).moveToElement(target).release(src).perform();
+		//click and hold the src and move untill the target then release the src element
+		
+	}
+	
 	
 	/*Custom wait examples*/
 	/**

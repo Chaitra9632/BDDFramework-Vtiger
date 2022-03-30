@@ -1,0 +1,267 @@
+TDD - test case is written first and then vll check debug and pass the test script
+BDD - we ll write the scenarios first
+      no test case is required
+      anybody like PO, BA who has good knowledge on product can write the feature file
+      feature file will be in a layman language
+Cucumber is the tool for BDD approach by SmartBear
+cucumber framework consists of 3 parts:
+-> Feauture file - 
+-> Step Definition - every step in feature file will be mapped to program 
+-> Runner Class
+=====================================================================================
+Gherkin language to write feature file
+Scenario-1: verify the user is able to place order
+Step 1: launch browser
+Step 2: login to app
+Step 3: navigate to products
+Step 4: search a product
+Step 5: Click on buy now
+Step 6: Provide address
+Step 7: Select payment mode
+Step 8: place Order
+
+Scenario:-verify the user is able to place order
+Given launch browser
+And login to app
+And navigate to products
+When search a product
+When Click on buy now
+When Provide address
+When Select payment mode
+Then place Order and Verfigy
+
+==================================================================================
+
+In Cucumber all Gherkins keywords will be annotaions
+Given => Pre condition
+When => action
+Then => post condition
+And => break down the sentence or giving continuation 
+
+Feature File:- file extention is .feature
+               live document where scenarios will be written using Gherkin keywords
+ 	       Gherkins keywords include SCENARIO, GIVEN, AND, WHEN, THEN
+	       - readable format
+               - Normal English
+	       -> # is a comment in feature file
+
+#Author: your.email@your.domain.com
+#Keywords Summary :
+#Feature: List of scenarios.
+#Scenario: Business rule through list of steps with arguments.
+#Given: Some precondition step
+#When: Some key actions
+#Then: To observe outcomes or validation
+#And,But: To enumerate more Given,When,Then steps
+#Scenario Outline: List of steps for data-driven as an Examples and <placeholder> - act like dataprovider
+#Examples: Container for s table - for Multiple data
+#Background: List of steps run before each of the scenarios
+#""" (Doc Strings)
+#| (Data Tables)
+#@ (Tags/Labels):To group Scenarios
+#<> (placeholder)
+#""
+## (Comments)
+@tag
+Feature: Title of your feature
+  I want to use this template for my feature file
+
+  @tag1
+  Scenario: Title of your scenario
+    Given I want to write a step with precondition
+    And some other precondition
+    When I complete action
+    And some other action
+    And yet another action
+    Then I validate the outcomes
+    And check more outcomes
+
+  @tag2
+  Scenario Outline: Title of your scenario outline
+    Given I want to write a step with <name>
+    When I check for the <value> in step
+    Then I verify the <status> in step
+
+    Examples: 
+      | name  | value | status  |
+      | name1 |     5 | success |
+      | name2 |     7 | Fail    |
+
+=======================================================================================
+src/test/java 
+-> features package
+   -> Login.feature - feature file
+-> StepDefinitions package
+   -> LoginTest - class - definition class that binds feature file in executable format
+
+
+Login.feature
+Feature: Login feature
+
+Scenario: As a user I want to Login to application with valid credentials
+Given I will launch browser
+Given I will enter the URL
+When Login page is displayed i will enter username and password
+And I will click on Login
+Then I will validate wheather home page is displayed or not  
+
+LoginTest - class in step definitions package
+public class LoginTest {
+	
+	WebDriver driver;
+	
+	@Given("I will launch browser")
+	public void i_will_launch_browser() {
+	   
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	}
+
+	@Given("I will enter the URL")
+	public void i_will_enter_the_url() {
+	  
+		driver.get("http://localhost:8888");
+	}
+
+	@When("Login page is displayed i will enter username and password")
+	public void login_page_is_displayed_i_will_enter_username_and_password() {
+		
+		driver.findElement(By.name("user_name")).sendKeys("admin");
+		driver.findElement(By.name("user_password")).sendKeys("manager");
+	   
+	}
+
+	@When("I will click on Login")
+	public void i_will_click_on_login() {
+	   
+		driver.findElement(By.id("submitButton")).click();
+	}
+
+	@Then("I will validate wheather home page is displayed or not")
+	public void i_will_validate_wheather_home_page_is_displayed_or_not() {
+		String expTitle = "Administrator - Home - vtiger CRM 5 - Commercial Open Source CRM";
+		String actTitle = driver.getTitle();
+		Assert.assertEquals(actTitle, expTitle);
+	  
+	}
+}
+
+ctrl+shft+o => import all suggestions at once
+
+-> if the steps are same for multiple scenarios in same feature file just copy as no new step definitions will not be genertated
+Runner class acts like a communition between feature file and step definitions
+Runner class consists of
+@cucumberOptions(  //from cucumber testNg library
+features = "provide feature file path location"
+glue = "Step definition package name where feature file should bind the steps"
+dryRun = true/false => if true - browser will not be launched but the feature file and step definition will be binded and any missing step definition 
+                                 for a particular scenario/ step will be provided
+                    => if false - Browser will be launched and the feature file and step definition will be binded and any missing step definition 
+                                  for a particular scenario/ step will be provided
+
+
+
+==> "data" specified in feature file acts as test data no need to specify in step definition
+    this creates Argumented methods hence we have to provide arguments in feature file
+
+Multiple data to be read 
+|name |testData1|TestData2 |
+|tc_01|Microsoft|Healthcare|-> iteration 1
+|tc_02|SoftTech |Healthcare|-> iteration 2
+
+to store data in table format and execute same scenario multiple time with different data(like dataprovider)
+scenario OutLine and Examples is the gherkins keywords used
+
+to use it in feature file in scenario outline use
+"<header>"
+
+background keyword will contain all the preconditions for a feature file. scenarios will be 
+optimised - duplicate steps in every scenarios will be avoided
+
+plugin :{"pretty","html:reportName.html"}=> to generate report
+
+Hook act like baseclass in cucumber
+@Before:- will execute before scenario
+@After:- will execute after scenario
+@BeforeStep
+@AfterStep
+
+Inheritance will not work with Hook class, if extended it will end up in invalid method exception
+==>it will automatically map the @Before and @After for every scenario in feature file
+
+if there are multiple @Before and @After annotaions in Hook class then
+it will follow alphabetical order or ascii value for execution 
+==> in order to set the order of execution, we use order similar to priority
+@Before(order = 0)
+@Before(order = 1) ----for @Before will execute in ascending order
+-----------default order will be 0----------------
+@After(order = 1)
+@After(order = 0) ----for @After will execute in descending order
+
+Since the Hook class cannot be extended in step definitions, driver reference cannot travel from
+parent to child, hence we use java concept called as "dependency injection" to pass the 
+driver reference from Hook class to step definitions
+
+Dependency injection, or DI, is a design pattern in which a class 
+requests dependencies from external sources rather than creating them.
+
+PicoContainer (from cucumber) - for dependency injection
+Guice (from google) - for DI
+
+
+RunnerIO
+
+@CucumberOptions(
+//Specify the particular feature file location to execute one feature file
+//Specify the package location to execute all feature files
+//Accepts array<string> multiple feature files can be given seperated by ,
+		features = {".\\src\\test\\java\\features"},
+
+// if Hook class is in separate package then we have use that package name also in glue
+// or the Hook class can be maintained in stepDefinitions package only
+		glue = {"stepDefinitions"},
+
+//if dryRun-> true - doesn't execute in the browser
+// if dryRun-> false execute in the browser
+		dryRun = false,
+		 
+// plugin -> print the log status/scenario steps in console helpful in debugging 
+// Used in report generation             
+		plugin = {"pretty","html:Report.html", "json:jsonRepost.json"},
+		     
+//print log in readable format by eliminating special characters                                    
+		monochrome = true,
+
+
+// Handles group execution where tags with @ are specified in feature file for scenario
+// @Smoke and @Regression -> and operator when both tags are given for 1 scenario
+// @Smoke or @Regression -> or opertaor when either of one tag is given for a scenarios
+// "not @Smoke" -> will exclude smoke tag and run all other tags
+		tags = "@Smoke and @End2End" 
+		                
+)	
+
+GrassHopper is the dependency used to configure the extent Reports in cucumber
+
+To perform cross browser execution, use multiple cmd prompts and read browser name from cmd Line
+String browser=System.getProperty("browserName");
+if(browserName.equalsIgnoreCare("chrome")
+{//launch chrome
+}	                
+
+in 1st cmd prompt
+mvn -Dtest=RunnerIO test -DbrowserName=Chrome	                
+
+in 2nd cmd prompt
+mvn -Dtest=RunnerIO test -DbrowserName=Firefox
+
+To attach report in jenkins
+add plugin called as html publisher in manage plugins
+postbuild action -> publish html report -> html directory to Archive -> folder where report is present
+                                        -> index pages -> reportName.html
+
+
+
+

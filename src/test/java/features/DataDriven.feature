@@ -9,11 +9,13 @@ Feature: Data Driven Testing
     And click on Login Button
     When Home page is displayed click on Organization link
 
+  @Smoke @End2End #Two groups can be used for a particular scenario
   Scenario: As a user I want to Create new Organization with mandatory fields
     And Click on create organization lookm up image
     And Enter the organization name "IDEXCEL"
     Then Validate wheather the organization is created or not  "IDEXCEL"
 
+  @Regression
   Scenario Outline: I want to create multiple Organization with Organization name and industry Type
     And Click on create organization lookm up image
     And enter organizattion name "<OrgName>"

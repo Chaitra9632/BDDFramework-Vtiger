@@ -27,8 +27,8 @@ public class Hook extends WebDriverUtility{
 		this.base=base;
 	}
 	
-	
-	@Before//(order = 1)
+    //order execution will be descending order for @After -ve 0 +ve
+	@Before//(order = 1)(value = "@Smoke")
 	public void beforeScenario() throws IOException
 	{
 		//System.out.println("inside second @Before ");

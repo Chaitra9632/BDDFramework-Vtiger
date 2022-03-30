@@ -11,7 +11,7 @@
         "steps": [
           {
             "result": {
-              "duration": 804337300,
+              "duration": 1124000000,
               "status": "passed"
             },
             "line": 7,
@@ -29,7 +29,7 @@
           },
           {
             "result": {
-              "duration": 102391900,
+              "duration": 125000000,
               "status": "passed"
             },
             "line": 8,
@@ -51,7 +51,7 @@
           },
           {
             "result": {
-              "duration": 2006374100,
+              "duration": 3296000000,
               "status": "passed"
             },
             "line": 9,
@@ -63,7 +63,7 @@
           },
           {
             "result": {
-              "duration": 3439157600,
+              "duration": 5091000000,
               "status": "passed"
             },
             "line": 10,
@@ -76,11 +76,11 @@
         ]
       },
       {
-        "start_timestamp": "2022-03-30T10:08:30.163Z",
+        "start_timestamp": "2022-03-30T11:36:01.218Z",
         "before": [
           {
             "result": {
-              "duration": 1773977500,
+              "duration": 3406000000,
               "status": "passed"
             },
             "match": {
@@ -102,7 +102,7 @@
               }
             ],
             "result": {
-              "duration": 4367209700,
+              "duration": 4671000000,
               "status": "passed"
             },
             "match": {
@@ -116,7 +116,7 @@
           {
             "result": {
               "error_message": "java.lang.AssertionError: null\r\n\tat org.testng.Assert.fail(Assert.java:99)\r\n\tat org.testng.Assert.fail(Assert.java:106)\r\n\tat stepDefinitions.DataDrivenTest.click_on_create_organization_lookm_up_image(DataDrivenTest.java:72)\r\n\tat ✽.Click on create organization lookm up image(file:///D:/MavenProjects/Practice.BDD/./src/test/java/features/DataDriven.feature:14)\r\n",
-              "duration": 1449507900,
+              "duration": 2317000000,
               "status": "failed"
             },
             "line": 14,
@@ -145,6 +145,7 @@
           },
           {
             "result": {
+              "duration": 1000000,
               "status": "skipped"
             },
             "line": 16,
